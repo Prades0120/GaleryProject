@@ -5,9 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.example.galeryproject.CardsAdapter
 import com.example.galeryproject.databinding.FragmentGalleryBinding
 
 class GalleryFragment : Fragment() {
@@ -23,7 +24,7 @@ class GalleryFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         galleryViewModel =
             ViewModelProvider(this).get(GalleryViewModel::class.java)
 
@@ -31,8 +32,11 @@ class GalleryFragment : Fragment() {
         val root: View = binding.root
 
         val recyclerView: RecyclerView = binding.recyclerView
-        galleryViewModel.content!!.observe(viewLifecycleOwner, {
-
+        galleryViewModel.content.observe(viewLifecycleOwner, {
+            val adapter = CardsAdapter(it)
+            recyclerView.setHasFixedSize(true)
+            recyclerView.adapter = adapter
+            recyclerView.layoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
         })
         return root
     }

@@ -5,6 +5,7 @@
       <map>
         <entry key="app/src/main/res/layout/fragment_gallery.xml" value="0.1752786220871327" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1752786220871327" />
+        <entry key="app/src/main/res/layout/item_card.xml" value="0.33" />
       </map>
     </option>
   </component>

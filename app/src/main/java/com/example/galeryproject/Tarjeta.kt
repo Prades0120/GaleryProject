@@ -1,4 +1,4 @@
 package com.example.galeryproject
 
-class Tarjeta {
+class Tarjeta(val cadena: String, val imagen: Int) {
 }
