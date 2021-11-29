@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 
 class CardsAdapter(private var items: ArrayList<Tarjeta>) : Adapter<CardsAdapter.TarjViewHolder>() {
+    lateinit var onLongClick: (View) -> Unit
 
     class TarjViewHolder(itemView: View) : ViewHolder(itemView), View.OnCreateContextMenuListener {
 
@@ -19,12 +20,6 @@ class CardsAdapter(private var items: ArrayList<Tarjeta>) : Adapter<CardsAdapter
         init {
             itemView.setOnCreateContextMenuListener(this)
         }
-
-         fun bindTarjeta(t: Tarjeta) {
-             texto.text = t.cadena
-             imagen.setImageResource(t.imagen)
-         }
-
         override fun onCreateContextMenu(
             menu: ContextMenu,
             v: View?,
@@ -34,6 +29,13 @@ class CardsAdapter(private var items: ArrayList<Tarjeta>) : Adapter<CardsAdapter
             menu.add(0,1,adapterPosition,"Eliminar")
             menu.add(0,2,adapterPosition,"Compartir")
         }
+
+         fun bindTarjeta(t: Tarjeta, onLongClick: (View) -> Unit) = with(itemView){
+             texto.text = t.cadena
+             imagen.setImageResource(t.imagen)
+             setOnLongClickListener { onLongClick(itemView)
+                                        true}
+         }
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): TarjViewHolder {
@@ -43,7 +45,7 @@ class CardsAdapter(private var items: ArrayList<Tarjeta>) : Adapter<CardsAdapter
 
     override fun onBindViewHolder(viewHolder: TarjViewHolder, pos: Int) {
         val item = items[pos]
-        viewHolder.bindTarjeta(item)
+        viewHolder.bindTarjeta(item, onLongClick)
     }
 
     override fun getItemCount(): Int {

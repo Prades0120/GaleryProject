@@ -14,4 +14,7 @@
     <string name="textview">TextView</string>
     <string name="cancel" tools:ignore="ButtonCase">CANCEL</string>
     <string name="accept">ACCEPT</string>
+    <string name="editar">Editar</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="compartir">Compartir</string>
 </resources>
